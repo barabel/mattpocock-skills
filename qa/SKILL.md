@@ -44,11 +44,13 @@ Keep as a single issue when:
 - It's one behavior that's wrong in one place
 - The symptoms are all caused by the same root behavior
 
-### 4. File the GitHub issue(s)
+### 4. Save the issue(s) to disk
 
-Create issues with `gh issue create`. Do NOT ask the user to review first — just file and share URLs.
+Write issues to `docs/issues/`. Create the directory if it does not exist. Do NOT ask the user to review first — just write and share file paths.
 
 Issues must be **durable** — they should still make sense after major refactors. Write from the user's perspective.
+
+Determine a slug from the issue description (lowercased, spaces → hyphens). For a single issue write `docs/issues/<slug>.md`. For a breakdown write `docs/issues/<NNN>-<slug>.md` (zero-padded, in dependency order) so you can reference real file names in "Blocked by".
 
 #### For a single issue
 
@@ -76,14 +78,14 @@ Use this template:
 
 #### For a breakdown (multiple issues)
 
-Create issues in dependency order (blockers first) so you can reference real issue numbers.
+Write files in dependency order (blockers first) so you can reference real file names in "Blocked by".
 
 Use this template for each sub-issue:
 
 ```
 ## Parent issue
 
-#<parent-issue-number> (if you created a tracking issue) or "Reported during QA session"
+`<parent-filename>` (if you created a tracking issue) or "Reported during QA session"
 
 ## What's wrong
 
@@ -99,7 +101,7 @@ Use this template for each sub-issue:
 
 ## Blocked by
 
-- #<issue-number> (if this issue can't be fixed until another is resolved)
+- `<filename>` (if this issue can't be fixed until another is resolved)
 
 Or "None — can start immediately" if no blockers.
 
@@ -112,7 +114,7 @@ When creating a breakdown:
 
 - **Prefer many thin issues over few thick ones** — each should be independently fixable and verifiable
 - **Mark blocking relationships honestly** — if issue B genuinely can't be tested until issue A is fixed, say so. If they're independent, mark both as "None — can start immediately"
-- **Create issues in dependency order** so you can reference real issue numbers in "Blocked by"
+- **Write files in dependency order** so you can reference real file names in "Blocked by"
 - **Maximize parallelism** — the goal is that multiple people (or agents) can grab different issues simultaneously
 
 #### Rules for all issue bodies
@@ -123,7 +125,7 @@ When creating a breakdown:
 - **Reproduction steps are mandatory** — if you can't determine them, ask the user
 - **Keep it concise** — a developer should be able to read the issue in 30 seconds
 
-After filing, print all issue URLs (with blocking relationships summarized) and ask: "Next issue, or are we done?"
+After writing, print all file paths (with blocking relationships summarized) and ask: "Next issue, or are we done?"
 
 ### 5. Continue the session
 

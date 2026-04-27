@@ -1,17 +1,17 @@
 ---
 name: to-issues
-description: Break a plan, spec, or PRD into independently-grabbable GitHub issues using tracer-bullet vertical slices. Use when user wants to convert a plan into issues, create implementation tickets, or break down work into issues.
+description: Break a plan, spec, or PRD into independently-grabbable issues using tracer-bullet vertical slices, saved as local markdown files. Use when user wants to convert a plan into issues, create implementation tickets, or break down work into issues.
 ---
 
 # To Issues
 
-Break a plan into independently-grabbable GitHub issues using vertical slices (tracer bullets).
+Break a plan into independently-grabbable issues using vertical slices (tracer bullets), saved as local `.md` files.
 
 ## Process
 
 ### 1. Gather context
 
-Work from whatever is already in the conversation context. If the user passes a GitHub issue number or URL as an argument, fetch it with `gh issue view <number>` (with comments).
+Work from whatever is already in the conversation context. If the user passes a file path as an argument, read it.
 
 ### 2. Explore the codebase (optional)
 
@@ -47,16 +47,23 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-### 5. Create the GitHub issues
+### 5. Write issues to disk
 
-For each approved slice, create a GitHub issue using `gh issue create`. Use the issue body template below.
+Determine the output directory:
+- If the user specified a path — use it.
+- Otherwise derive a slug from the plan/feature title (lowercased, spaces → hyphens) and use `docs/issues/<slug>/`.
 
-Create issues in dependency order (blockers first) so you can reference real issue numbers in the "Blocked by" field.
+Create the directory if it does not exist.
+
+For each approved slice, write a file named `<NNN>-<slug>.md` where `NNN` is a zero-padded sequence number (001, 002, …) and `slug` is the title lowercased with spaces replaced by hyphens.
+
+Write files in dependency order (blockers first) so you can reference real file names in the "Blocked by" field.
 
 <issue-template>
-## Parent
+# <Title>
 
-#<parent-issue-number> (if the source was a GitHub issue, otherwise omit this section)
+**Type:** HITL / AFK
+**Blocked by:** `<filename>` / None — can start immediately
 
 ## What to build
 
@@ -67,13 +74,11 @@ A concise description of this vertical slice. Describe the end-to-end behavior, 
 - [ ] Criterion 1
 - [ ] Criterion 2
 - [ ] Criterion 3
-
-## Blocked by
-
-- Blocked by #<issue-number> (if any)
-
-Or "None - can start immediately" if no blockers.
-
 </issue-template>
 
-Do NOT close or modify any parent issue.
+After writing all files, print a summary table:
+
+| File | Type | Blocked by |
+|------|------|------------|
+| 001-slug.md | AFK | None |
+| 002-slug.md | HITL | 001-slug.md |

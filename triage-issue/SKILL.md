@@ -54,9 +54,11 @@ Rules:
 - Include a final refactor step if needed
 - **Durability**: Only suggest fixes that would survive radical codebase changes. Describe behaviors and contracts, not internal structure. Tests assert on observable outcomes (API responses, UI state, user-visible effects), not internal state. A good suggestion reads like a spec; a bad one reads like a diff.
 
-### 5. Create the GitHub issue
+### 5. Save the issue to disk
 
-Create a GitHub issue using `gh issue create` with the template below. Do NOT ask the user to review before creating - just create it and share the URL.
+Determine a slug from the problem description (lowercased, spaces → hyphens). Write the file to `docs/issues/<slug>.md`. Create the directory if it does not exist. Do NOT ask the user to review before writing.
+
+Use the template below:
 
 <issue-template>
 
@@ -99,4 +101,4 @@ A numbered list of RED-GREEN cycles:
 
 </issue-template>
 
-After creating the issue, print the issue URL and a one-line summary of the root cause.
+After writing the file, print the file path and a one-line summary of the root cause.
