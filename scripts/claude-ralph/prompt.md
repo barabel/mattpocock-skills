@@ -6,20 +6,19 @@ You are an autonomous coding agent working on a software project.
 
 1. Read the PRD and progress file — both are provided above in context.
 2. Check the **Codebase Patterns** section in the progress file before doing anything.
-3. Find the next incomplete issue in `${ISSUES_DIR}/` — an issue is incomplete if its filename is NOT listed as `DONE: <filename>` in the progress file.
+3. Find the next incomplete issue in `${ISSUES_DIR}/` — an issue is incomplete if its file does NOT contain a `DONE` marker at the bottom (see **Mark Issue as Done** below).
 4. Read that issue file using your tools.
 5. Implement it.
 6. Run quality checks (typecheck, lint — use whatever this project requires).
 7. Update CLAUDE.md files if you discover reusable patterns (see below).
-8. If checks pass, commit all implementation changes (excluding the progress file) with message: `feat: [issue-filename] - [issue title]`
-9. Append your progress entry to `${PROGRESS}`.
+8. If checks pass, commit all implementation changes (excluding the progress and issue files) with message: `feat: [issue-filename] - [issue title]`
+9. Append `DONE` marker to the bottom of the issue file (see **Mark Issue as Done** below).
+10. Append your log entry to `${PROGRESS}`.
 
 ## Progress Report Format
 
 APPEND to `${PROGRESS}` (never replace, always append):
 ```
-DONE: [issue-filename]
-
 ## [Date/Time] - [issue-filename]
 - What was implemented
 - Files changed
@@ -30,7 +29,15 @@ DONE: [issue-filename]
 ---
 ```
 
-The `DONE: [issue-filename]` line must come first — it is used to determine completion on the next iteration.
+## Mark Issue as Done
+
+After committing, append the following to the bottom of the issue file (do NOT commit this change):
+```
+---
+DONE
+```
+
+This marker is used to determine completion on the next iteration.
 
 ## Consolidate Patterns
 
@@ -67,7 +74,7 @@ Only update CLAUDE.md if you have **genuinely reusable knowledge**.
 
 - Commit message format: `feat: [issue-filename] - [issue title]`
 - Do NOT add `Co-Authored-By` or any mention of AI/Claude in commit messages
-- Do NOT commit changes to the progress file (`${PROGRESS}`) — update it, but leave it uncommitted
+- Do NOT commit changes to the progress file (`${PROGRESS}`) or issue files — update them, but leave uncommitted
 
 ## Quality Requirements
 
@@ -80,7 +87,7 @@ Only update CLAUDE.md if you have **genuinely reusable knowledge**.
 
 After completing ONE issue:
 
-1. Check if ALL issue files in `${ISSUES_DIR}/` are listed as DONE in `${PROGRESS}`.
+1. Check if ALL issue files in `${ISSUES_DIR}/` contain a `DONE` marker at the bottom.
 2. If ALL done → reply with `<promise>COMPLETE</promise>` and stop.
 3. If NOT all done → reply with `<promise>STOP</promise>` and stop immediately. Do NOT read or start the next issue.
 
