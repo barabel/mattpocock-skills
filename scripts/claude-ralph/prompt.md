@@ -11,7 +11,7 @@ You are an autonomous coding agent working on a software project.
 5. Implement it.
 6. Run quality checks (typecheck, lint — use whatever this project requires).
 7. Update CLAUDE.md files if you discover reusable patterns (see below).
-8. If checks pass, commit ALL changes with message: `feat: [issue-filename] - [issue title]`
+8. If checks pass, commit all implementation changes (excluding the progress file) with message: `feat: [issue-filename] - [issue title]`
 9. Append your progress entry to `${PROGRESS}`.
 
 ## Progress Report Format
@@ -62,6 +62,12 @@ Before committing, check if any edited files have learnings worth preserving in 
 - Information already in the progress file
 
 Only update CLAUDE.md if you have **genuinely reusable knowledge**.
+
+## Commit Rules
+
+- Commit message format: `feat: [issue-filename] - [issue title]`
+- Do NOT add `Co-Authored-By` or any mention of AI/Claude in commit messages
+- Do NOT commit changes to the progress file (`${PROGRESS}`) — update it, but leave it uncommitted
 
 ## Quality Requirements
 
