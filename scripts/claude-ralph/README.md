@@ -14,7 +14,7 @@
 
 1. Запусти скрипт:
    ```sh
-   bash scripts/ralph/loop.sh refactor-use-view-items-animations
+   bash scripts/claude-ralph/loop.sh refactor-use-view-items-animations
    ```
 2. Claude откроется в интерактивном режиме в том же терминале
 3. Наблюдай — он читает PRD и progress, находит следующую issue, реализует

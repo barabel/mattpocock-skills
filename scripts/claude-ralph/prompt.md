@@ -72,15 +72,16 @@ Only update CLAUDE.md if you have **genuinely reusable knowledge**.
 
 ## Stop Condition
 
-After completing an issue, check if ALL issue files in `${ISSUES_DIR}/` are listed as DONE in `${PROGRESS}`.
+After completing ONE issue:
 
-If ALL issues are complete, reply with:
-`<promise>COMPLETE</promise>`
+1. Check if ALL issue files in `${ISSUES_DIR}/` are listed as DONE in `${PROGRESS}`.
+2. If ALL done → reply with `<promise>COMPLETE</promise>` and stop.
+3. If NOT all done → reply with `<promise>STOP</promise>` and stop immediately. Do NOT read or start the next issue.
 
-Otherwise end your response normally — the next iteration will continue.
+**HARD RULE: one issue per session. After appending to the progress file, stop — no exceptions.**
 
 ## Important
 
-- Work on ONE issue per iteration
+- Work on ONE issue per iteration — stop after committing and updating progress
 - Read Codebase Patterns in the progress file before starting
 - The PRD and progress file contents are already loaded in context above
