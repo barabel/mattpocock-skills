@@ -19,7 +19,7 @@ This skill will be invoked when the user wants to create a refactor request. You
 
 7. Break the implementation into a plan of tiny commits. Remember Martin Fowler's advice to "make each refactoring step as small as possible, so that you can always see the program working."
 
-8. Save the refactor plan to disk. Determine a slug from the problem description (lowercased, spaces → hyphens) and write it to `docs/issues/<slug>.md`. Create the directory if it does not exist. Use the following template:
+8. Save the refactor plan to disk. Determine a slug from the problem description (lowercased, spaces → hyphens) and write it to `docs/plans/<slug>.md`. Create the directory if it does not exist. Use the following template:
 
 <refactor-plan-template>
 
